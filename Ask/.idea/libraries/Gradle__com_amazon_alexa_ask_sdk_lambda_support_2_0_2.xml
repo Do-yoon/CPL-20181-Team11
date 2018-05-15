@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.amazon.alexa:ask-sdk-lambda-support:2.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazon.alexa/ask-sdk-lambda-support/2.0.2/b69a2419f83241e56cdf303d53aa30561bd960f5/ask-sdk-lambda-support-2.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazon.alexa/ask-sdk-lambda-support/2.0.2/c50f167587f6375af5fbcb2d12436a79b4d54a61/ask-sdk-lambda-support-2.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

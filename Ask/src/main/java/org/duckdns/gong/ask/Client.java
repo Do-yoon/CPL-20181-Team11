@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-class Client {
+public class Client {
     private List<String> notiarray=new ArrayList<String>();
     private final String hostname = "gong.duckdns.org";
     private final int port = 13899;

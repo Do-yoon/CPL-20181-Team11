@@ -38,7 +38,8 @@ public class Client {
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                rh = new RequestHandler(request, context);              // 알렉사의 요청을 처리하기 위해 인스턴스 생성
+                                // 알렉사의 요청을 처리하기 위해 인스턴스 생성
+                                rh = new RequestHandler(request, context);
                             }
                         }, 0);
                     }

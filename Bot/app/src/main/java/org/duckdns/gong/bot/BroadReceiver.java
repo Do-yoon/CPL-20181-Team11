@@ -31,10 +31,11 @@ public class BroadReceiver extends BroadcastReceiver {
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 
             if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                if (wifi.getSSID().equals("\"GONG-2.4G\"")) {           // 와이파이의 이름으로 서버와 같은 네트워크에 있는지 체크
+                // 와이파이의 이름으로 서버와 같은 네트워크에 있는지 체크
+                if (wifi.getSSID().equals("\"GONG-2.4G\"")) {
                     samenetwork = true;
                     ce.setContext(context);
-                    ce.enterServer();                                   // 서버와 연결
+                    ce.enterServer();
                 }
             } else if (networkInfo.getState() == NetworkInfo.State.DISCONNECTED && samenetwork) {
                 samenetwork = false;

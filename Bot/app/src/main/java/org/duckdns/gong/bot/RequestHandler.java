@@ -8,6 +8,8 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.telephony.SmsManager;
+import android.util.Log;
+
 import java.util.regex.Pattern;
 
 public class RequestHandler extends Activity {
@@ -27,7 +29,7 @@ public class RequestHandler extends Activity {
         } else if(func.equals("message")) {
             /* 메세지 요청일 경우 */
             who=request.split(" ")[1];
-            content=request.split(" ")[2];
+            content=request.substring(request.indexOf(" ",request.indexOf(" ")+1) + 1);
             messageFunc(who,content);
         }
     }

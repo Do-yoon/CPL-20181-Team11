@@ -25,7 +25,7 @@ public class NotiService extends NotificationListenerService {
                 title = extras.getString(Notification.EXTRA_TITLE);
 
                 /* 서버로 보내는 문자열을 띄어쓰기를 통하여 어플 이름, 타이틀, 내용을 구분
-                setnoti는 알림이라는 것을 서버에 알리기 위해서 추가*/
+                   setnoti는 알림이라는 것을 서버에 알리기 위해서 추가*/
                 message = "setnoti " + appname + " " + title + " " + text.toString();
                 BroadReceiver.ce.sendStr(message);
             } catch (PackageManager.NameNotFoundException e) {

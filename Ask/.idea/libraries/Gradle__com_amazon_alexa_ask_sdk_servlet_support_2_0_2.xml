@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.amazon.alexa:ask-sdk-servlet-support:2.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazon.alexa/ask-sdk-servlet-support/2.0.2/d47e4bdee25af9584edd188a7e8ff456894edddd/ask-sdk-servlet-support-2.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazon.alexa/ask-sdk-servlet-support/2.0.2/b68f26fbcb60b63f748618609b93ce4f616484b7/ask-sdk-servlet-support-2.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
