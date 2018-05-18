@@ -11,6 +11,7 @@ import org.duckdns.gong.ask.handlers.NotiIntentHandler;
 import org.duckdns.gong.ask.handlers.NumberCallIntentHandler;
 import org.duckdns.gong.ask.handlers.SessionEndedRequestHandler;
 import org.duckdns.gong.ask.handlers.LaunchRequestHandler;
+import org.duckdns.gong.ask.handlers.WolIntentHandler;
 
 public class AndroidStreamHandler extends SkillStreamHandler {
     private static Skill getSkill() {
@@ -20,6 +21,7 @@ public class AndroidStreamHandler extends SkillStreamHandler {
                         new NameCallIntentHandler(),
                         new NumberCallIntentHandler(),
                         new MessageIntentHandler(),
+                        new WolIntentHandler(),
                         new CancelandStopIntentHandler(),
                         new HelpIntentHandler(),
                         new LaunchRequestHandler(),

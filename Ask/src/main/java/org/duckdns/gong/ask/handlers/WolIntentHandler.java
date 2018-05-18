@@ -7,29 +7,26 @@ import org.duckdns.gong.ask.Client;
 import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class NotiIntentHandler implements RequestHandler {
+public class WolIntentHandler implements RequestHandler {
     private Client cl;
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("NotiIntent"));
+        return input.matches(intentName("WolIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
         cl = new Client();
-        String speechText;
+        String speechText="Ok. I will send wol request";
 
         cl.enterServer();
-        cl.sendStr("getnoti please");
-        cl.readStr();
+        cl.sendStr("req wol please");
         cl.closeConnect();
-
-        speechText = String.join(", ", cl.getNotiarray());
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("NotiIntent", speechText)
+                .withSimpleCard("WolIntent", speechText)
                 .build();
     }
 }

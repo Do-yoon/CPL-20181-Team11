@@ -24,8 +24,8 @@ public class NumberCallIntentHandler implements RequestHandler {
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
-        String speechText;
         DialogState dialogueState = intentRequest.getDialogState();
+        String speechText;
 
         if (dialogueState.equals(DialogState.STARTED)) {
             return input.getResponseBuilder()

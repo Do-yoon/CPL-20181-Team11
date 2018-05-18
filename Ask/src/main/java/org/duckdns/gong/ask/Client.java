@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private List<String> notiarray=new ArrayList<String>();
-    private final String hostname = "gong.duckdns.org";
+    private List<String> notiArray=new ArrayList<String>();
+    private final String hostName = "gong.duckdns.org";
     private final int port = 13899;
     private Socket socket = null;
     private BufferedWriter bw;
@@ -20,12 +20,12 @@ public class Client {
     private String redata;
 
     public List<String> getNotiarray() {
-        return notiarray;
+        return notiArray;
     }
 
     public void enterServer() {
         try {
-            socket = new Socket(InetAddress.getByName(hostname), port);
+            socket = new Socket(InetAddress.getByName(hostName), port);
             bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
@@ -55,14 +55,14 @@ public class Client {
 
     public void readStr() {
         try {
-            /* q1w2e3r4은 끝이라는 의미를 가지는 문자열이다 */
+            // q1w2e3r4은 끝이라는 의미를 가지는 문자열이다
             while ((redata = br.readLine()) != null && !(redata.equals("q1w2e3r4"))) {
-                notiarray.add(redata);
+                notiArray.add(redata);
             }
-            if(redata.equals("q1w2e3r4") && notiarray.size()==0)
-                notiarray.add("There is no notification");
+            if(redata.equals("q1w2e3r4") && notiArray.size()==0)
+                notiArray.add("There is no notification");
             else
-                notiarray.add(0,String.format("There is %d notification",notiarray.size()));
+                notiArray.add(0,String.format("There is %d notification",notiArray.size()));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,8 +11,8 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 public class Client {
-    private final String SERVER_IP = "192.168.1.112";
-    private final int SERVER_PORT = 13899;
+    private final static String IP = "192.168.1.112";
+    private final static int PORT = 13899;
     private Socket socket = null;
     private BufferedWriter bw = null;
     private BufferedReader br = null;
@@ -22,24 +22,25 @@ public class Client {
 
     public void setContext(Context context) {
         this.context = context;
+        rh = new RequestHandler(context);
     }
 
     public void enterServer() {
         new Thread() {
             public void run() {
                 try {
-                    socket = new Socket(SERVER_IP, SERVER_PORT);
+                    socket = new Socket(IP, PORT);
                     br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-                    /* 알렉사의 요청(전화, 메세지)을 무한정 기다림 */
+                    // 서버로부터 알렉사의 요청을 무한정 기다림
                     while ((request = br.readLine()) != null) {
                         Handler mHandler = new Handler(Looper.getMainLooper());
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                // 알렉사의 요청을 처리하기 위해 인스턴스 생성
-                                rh = new RequestHandler(request, context);
+                                // 서버로부터 온 요청을 처리
+                                rh.processReq(request);
                             }
                         }, 0);
                     }
@@ -50,7 +51,6 @@ public class Client {
                 }
             }
         }.start();
-
     }
 
     public void sendStr(final String msg) {

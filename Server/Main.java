@@ -11,14 +11,14 @@ import java.util.List;
 
 // 같은 네트워크에 있는 디바이스들의 아이피와 맥어드레스를 arp-scan 기능을 이용하여 찾은 후 해시맵으로 관리
 class Arpscan extends Thread {
-    private HashMap<String, String> adrmap = new HashMap<String, String>();
+    private HashMap<String, String> adrMap = new HashMap<String, String>();
     // 안드로이드와 연결되었는지 확인하기 위한 변수
-    private boolean andcon=false;
+    private boolean andCon=false;
     // 안드로이드와 연결된 소켓을 받아오기 위한 변수
-    private Socket andsocket=null;
+    private Socket andSocket=null;
 
     public boolean checkIp(String ip) {
-        for (String temp : adrmap.keySet()) {
+        for (String temp : adrMap.keySet()) {
             if (ip.equals(temp))
                 return true;
         }
@@ -26,43 +26,43 @@ class Arpscan extends Thread {
     }
 
     public boolean checkMac(String mac) {
-        for (String temp : adrmap.keySet()) {
-            if (mac.equals(adrmap.get(temp)))
+        for (String temp : adrMap.keySet()) {
+            if (mac.equals(adrMap.get(temp)))
                 return true;
         }
         return false;
     }
 
     public String getMac(String ip) {
-        for (String temp : adrmap.keySet()) {
+        for (String temp : adrMap.keySet()) {
             if (ip.equals(temp))
-                return adrmap.get(temp);
+                return adrMap.get(temp);
         }
         return null;
     }
 
     public String getIp(String mac) {
-        for (String temp : adrmap.keySet()) {
-            if (mac.equals(adrmap.get(temp)))
+        for (String temp : adrMap.keySet()) {
+            if (mac.equals(adrMap.get(temp)))
                 return temp;
         }
         return null;
     }
 
     public void setAdrmap(String ip, String mac) {
-        adrmap.put(ip, mac);
+        adrMap.put(ip, mac);
     }
 
     public void setAndcon(boolean andcon) {
-        this.andcon = andcon;
+        this.andCon = andcon;
     }
 
     public void setAndsocket(Socket andsocket) {
-        this.andsocket = andsocket;
+        this.andSocket = andsocket;
     }
 
     public void resetAdrmap() {
-        adrmap.clear();
+        adrMap.clear();
     }
 
     @Override
@@ -92,10 +92,10 @@ class Arpscan extends Thread {
 
                 // 안드로이드 기기의 비정상적인 소켓 종료에 대처하기 위해 기기의 아이피가 내부 네트워크에 있는지 확인
                 // 연결된 적이 있는데 내부 네트워크에 아이피가 없을 경우 기기와 연결된 소켓을 종료
-                if(andcon) {
+                if(andCon) {
                     if(!(checkIp("192.168.1.47"))) {
-                        andsocket.close();
-                        andcon = false;
+                        andSocket.close();
+                        andCon = false;
                     }
                 }
 
@@ -112,18 +112,18 @@ class Arpscan extends Thread {
 
 // 모바일에서 받아 온 알림을 배열로 관리하는 클래스
 class Notification {
-    private List<String> notiarray = new ArrayList<String>();
+    private List<String> notiArray = new ArrayList<String>();
 
     public void addNotiarray(String noti) {
-        notiarray.add(noti);
+        notiArray.add(noti);
     }
 
     public void resetNoti() {
-        notiarray.clear();
+        notiArray.clear();
     }
 
     public List<String> getallNotiarray() {
-        return notiarray;
+        return notiArray;
     }
 }
 
@@ -131,7 +131,7 @@ class Server {
     private Socket socket;
     private final int PORT;
     private ServerSocket serverSocket = null;
-    private Notification notiarray = new Notification();
+    private Notification notiArray = new Notification();
     // 안드로이드 클라이언트와 연결된 출력 스트림을 얻기 위하여 선언
     private HashMap<String, BufferedWriter> hm = new HashMap<String, BufferedWriter>();
     private Arpscan as;
@@ -179,26 +179,26 @@ class Server {
     // 다수의 클라이언트와 통신하기 위한 클래스
     class ServerThread {
         private String redata, request;
-        private Socket threadsocket;
+        private Socket threadSocket;
         private BufferedReader br = null;
         private BufferedWriter bw = null;
 
         public ServerThread(Socket threadsocket) {
-            this.threadsocket=threadsocket;
+            this.threadSocket=threadsocket;
         }
 
         public void readStr() {
             new Thread() {
                 public void run() {
                     try {
-                        br = new BufferedReader(new InputStreamReader(threadsocket.getInputStream()));
-                        bw = new BufferedWriter(new OutputStreamWriter(threadsocket.getOutputStream()));
+                        br = new BufferedReader(new InputStreamReader(threadSocket.getInputStream()));
+                        bw = new BufferedWriter(new OutputStreamWriter(threadSocket.getOutputStream()));
 
                         // 안드로이드 클라이언트의 내부 고정아이피를 이용해 안드로이드와 연결된 출력 스트림을 획득*/
-                        if (threadsocket.getInetAddress().toString().equals("/192.168.1.47")) {
+                        if (threadSocket.getInetAddress().toString().equals("/192.168.1.47")) {
                             hm.put("android", bw);
                             as.setAndcon(true);
-                            as.setAndsocket(threadsocket);
+                            as.setAndsocket(threadSocket);
                         }
 
                     /* 연결된 클라이언트로 부터 문자열을 기다림
@@ -211,11 +211,11 @@ class Server {
 
                             switch (request) {
                                 case "setnoti":
-                                    notiarray.addNotiarray(redata.substring(redata.indexOf(" ") + 1));
+                                    notiArray.addNotiarray(redata.substring(redata.indexOf(" ") + 1));
                                     break;
                                 case "getnoti":
-                                    notiarray.addNotiarray("q1w2e3r4");
-                                    writeStr(notiarray);
+                                    notiArray.addNotiarray("q1w2e3r4");
+                                    writeStr(notiArray);
                                     break;
                                 case "req":
                                     writeStr(redata.substring(redata.indexOf(" ") + 1), hm.get("android"));
@@ -234,12 +234,12 @@ class Server {
                             System.out.println(redata);
                         }
 
-                        System.out.println(threadsocket.getInetAddress() + "로부터 연결종료(null)");
+                        System.out.println(threadSocket.getInetAddress() + "로부터 연결종료(null)");
                         br.close();
                         bw.close();
-                        threadsocket.close();
+                        threadSocket.close();
                     } catch (IOException e) {
-                        System.out.println(threadsocket.getInetAddress() + "로부터 연결종료(IOException)");
+                        System.out.println(threadSocket.getInetAddress() + "로부터 연결종료(IOException)");
                         hm.clear();
                     }
                 }
@@ -285,9 +285,9 @@ class Server {
 
 public class Main {
     public static void main(String[] args) {
-        final int SERVER_PORT = 13899;
+        final int PORT = 13899;
         Arpscan as = new Arpscan();
-        Server server = new Server(SERVER_PORT, as);
+        Server server = new Server(PORT, as);
 
         as.start();
         server.openServer();
