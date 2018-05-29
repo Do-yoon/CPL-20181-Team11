@@ -14,7 +14,7 @@ public class HelpIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Tell me what you want";
+        String speechText = "Tell me what you want.";
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)

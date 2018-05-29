@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Bot</string>
+    <string name="pref_title_server_category">서버</string>
+    <string name="pref_title_server_ip">아이피</string>
+    <string name="pref_summary_server_ip">연결하고자 하는 서버의 아이피를 입력</string>
+    <string name="pref_title_server_port">포트번호</string>
+    <string name="pref_summary_server_port">연결하고자 하는 서버의 포트번호를 입력</string>
+    <string name="pref_title_wifi_name">와이파이 이름</string>
+    <string name="pref_summary_wifi_name">서버와 같은 네트워크에 있는 와이파이 이름을 입력</string>
+    <string name="pref_title_noti_category">알림</string>
+    <string name="pref_title_noti_app">어플리케이션</string>
+    <string name="pref_summary_noti_app">알림을 읽어들일 어플리케이션을 설정</string>
+    <string name="pref_title_wol_category">Wake on lan</string>
+    <string name="pref_title_wol_whether">사용</string>
+    <string name="pref_title_wol_ip">아이피</string>
+    <string name="pref_summary_wol_ip">Wol 기능을 사용하고자 하는 기기의 아이피를 입력</string>
+    <string name="pref_title_wol_mac">맥 주소</string>
+    <string name="pref_summary_wol_mac">Wol 기능을 사용하고자 하는 기기의 맥 주소를 입력</string>
 </resources>

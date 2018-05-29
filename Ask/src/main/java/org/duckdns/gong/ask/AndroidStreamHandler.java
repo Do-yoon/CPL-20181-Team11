@@ -12,16 +12,24 @@ import org.duckdns.gong.ask.handlers.NumberCallIntentHandler;
 import org.duckdns.gong.ask.handlers.SessionEndedRequestHandler;
 import org.duckdns.gong.ask.handlers.LaunchRequestHandler;
 import org.duckdns.gong.ask.handlers.WolIntentHandler;
+import org.duckdns.gong.ask.handlers.TimerIntentHandler;
+import org.duckdns.gong.ask.handlers.AlarmIntentHandler;
+import org.duckdns.gong.ask.handlers.MusicIntentHandler;
+import org.duckdns.gong.ask.handlers.CalendarIntentHandler;
 
 public class AndroidStreamHandler extends SkillStreamHandler {
     private static Skill getSkill() {
         return Skills.standard()
                 .addRequestHandlers(
+                        new CalendarIntentHandler(),
+                        new MusicIntentHandler(),
+                        new AlarmIntentHandler(),
                         new NotiIntentHandler(),
                         new NameCallIntentHandler(),
                         new NumberCallIntentHandler(),
                         new MessageIntentHandler(),
                         new WolIntentHandler(),
+                        new TimerIntentHandler(),
                         new CancelandStopIntentHandler(),
                         new HelpIntentHandler(),
                         new LaunchRequestHandler(),

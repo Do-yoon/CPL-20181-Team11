@@ -18,9 +18,10 @@ public class WolIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         cl = new Client();
-        String speechText="Ok. I will send wol request";
+        String speechText="Ok. I will send wake on lan request.";
 
         cl.enterServer();
+        // 서버로 Wake on lan 요청을 전송
         cl.sendStr("req wol please");
         cl.closeConnect();
 

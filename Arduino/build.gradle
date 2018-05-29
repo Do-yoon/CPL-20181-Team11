@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        compile 'com.amazon.alexa:ask-sdk:2.0.2'
+    }
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+task fatJar(type: Jar) {
+    baseName = project.name + '-fat'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+build.dependsOn fatJar

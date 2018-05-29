@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_title_server_category"
+        android:key="pref_key_server_settings">
+        <EditTextPreference
+            android:title="@string/pref_title_server_ip"
+            android:summary="@string/pref_summary_server_ip"
+            android:key="pref_key_server_ip"/>
+        <EditTextPreference
+            android:title="@string/pref_title_server_port"
+            android:summary="@string/pref_summary_server_port"
+            android:key="pref_key_server_port" />
+        <EditTextPreference
+            android:title="@string/pref_title_wifi_name"
+            android:summary="@string/pref_summary_wifi_name"
+            android:key="pref_key_wifi_name" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_title_noti_category"
+        android:key="pref_key_noti_setting">
+        <PreferenceScreen
+            android:title="@string/pref_title_noti_app"
+            android:summary="@string/pref_summary_noti_app"
+            android:key="pref_key_noti_app">
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_title_wol_category"
+        android:key="pref_key_wol_settings">
+        <SwitchPreference
+            android:title="@string/pref_title_wol_whether"
+            android:key="pref_key_wol_whether" />
+        <EditTextPreference
+            android:title="@string/pref_title_wol_ip"
+            android:summary="@string/pref_summary_wol_ip"
+            android:key="pref_key_wol_ip"
+            android:dependency="pref_key_wol_whether" />
+        <EditTextPreference
+            android:title="@string/pref_title_wol_mac"
+            android:summary="@string/pref_summary_wol_mac"
+            android:key="pref_key_wol_mac"
+            android:dependency="pref_key_wol_whether" />
+    </PreferenceCategory>
+</PreferenceScreen>
