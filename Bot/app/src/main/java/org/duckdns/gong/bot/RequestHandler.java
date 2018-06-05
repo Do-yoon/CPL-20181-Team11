@@ -41,7 +41,6 @@ public class RequestHandler {
         }
     }
 
-
     public RequestHandler(Context context) {
         this.context = context;
     }
@@ -67,7 +66,7 @@ public class RequestHandler {
                             , sharedPref.getString("pref_key_wol_mac", ""));
                     break;
                 } else {
-                    Toast.makeText(context, "설정창에서 Wake on lan 사용을 켜주세요", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "설정창에서 Wake on lan 사용을 켜주세요", Toast.LENGTH_LONG).show();
                 }
                 // 타이머 설정요청일 경우
             case "timer":
@@ -90,7 +89,7 @@ public class RequestHandler {
                 calendarFunc(request.substring(request.indexOf(" ") + 1));
                 break;
             default:
-                Toast.makeText(context, "해당기능은 구현이 되어있지 않습니다", Toast.LENGTH_SHORT);
+                Toast.makeText(context, "해당기능은 구현이 되어있지 않습니다", Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -100,11 +99,15 @@ public class RequestHandler {
 
         // 보내는 사람이 이름인지 전화번호 인지를 구별하여 이름일 경우 전화번호로 변경
         if (Pattern.matches("^[a-zA-Z]*$", who)) {
-            num = numberByName(who);
+            // numberByName 메소드는 연락처에 이름이 없는 경우 null을 반환. null일 경우 Toast메시지를 띄우고 종료
+            if ((num = numberByName(who)) == null) {
+                Toast.makeText(context, "연락처에 등록되지 않은 사용자입니다", Toast.LENGTH_LONG).show();
+                return;
+            }
         } else if (Pattern.matches("^[0-9]*$", who)) {
             num = who;
         } else {
-            Toast.makeText(context, "식별할 수 있는 형식이 아닙니다", Toast.LENGTH_SHORT);
+            Toast.makeText(context, "식별할 수 있는 형식이 아닙니다", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -115,11 +118,15 @@ public class RequestHandler {
         String num;
 
         if (Pattern.matches("^[a-zA-Z]*$", who)) {
-            num = numberByName(who);
+            // numberByName 메소드는 연락처에 이름이 없는 경우 null을 반환. null일 경우 Toast 메시지를 띄우고 종료
+            if ((num = numberByName(who)) == null) {
+                Toast.makeText(context, "연락처에 등록되지 않은 사용자입니다", Toast.LENGTH_LONG).show();
+                return;
+            }
         } else if (Pattern.matches("^[0-9]*$", who)) {
             num = who;
         } else {
-            Toast.makeText(context, "식별할 수 있는 형식이 아닙니다", Toast.LENGTH_SHORT);
+            Toast.makeText(context, "식별할 수 있는 형식이 아닙니다", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -168,7 +175,7 @@ public class RequestHandler {
             hour = Integer.parseInt(time.split(":")[0]);
             minute = Integer.parseInt(time.split(":")[1]);
         } else {
-            Toast.makeText(context, "입력된 시간의 형식이 잘못되었습니다", Toast.LENGTH_SHORT);
+            Toast.makeText(context, "입력된 시간의 형식이 잘못되었습니다", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -188,18 +195,33 @@ public class RequestHandler {
             hour = Integer.parseInt(time.split(":")[0]);
             minute = Integer.parseInt(time.split(":")[1]);
         } else {
-            Toast.makeText(context, "입력된 시간의 형식이 잘못되었습니다", Toast.LENGTH_SHORT);
+            Toast.makeText(context, "입력된 시간의 형식이 잘못되었습니다", Toast.LENGTH_LONG).show();
             return;
         }
 
-        // 반복요청한 요일들을 배열에 저장
+        // 반복요청한 요일이 여러개일 경우
         if (day.contains(" ")) {
             for (String temp : day.split(" ")) {
-                DayOfWeek dow = DayOfWeek.valueOf(temp.toUpperCase());
+                DayOfWeek dow;
+                try {
+                    dow = DayOfWeek.valueOf(temp.toUpperCase());
+                // 열거형에 없는 문자열이 들어올 경우 Toast 메시지를 띄우고 종료
+                } catch (IllegalArgumentException e) {
+                    Toast.makeText(context, "요일이 잘못되었습니다", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 days.add(dow.getValue());
             }
+        // 반복요청한 요일이 하나일 경우
         } else {
-            DayOfWeek dow = DayOfWeek.valueOf(day.toUpperCase());
+            DayOfWeek dow;
+            try {
+                dow = DayOfWeek.valueOf(day.toUpperCase());
+            // 열거형에 없는 문자열이 들어올 경우 Toast 메시지를 띄우고 종료
+            } catch (IllegalArgumentException e) {
+                Toast.makeText(context, "요일이 잘못되었습니다", Toast.LENGTH_LONG).show();
+                return;
+            }
             days.add(dow.getValue());
         }
 
@@ -233,10 +255,10 @@ public class RequestHandler {
                 keyEvent = new KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0);
                 musicIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
                 context.sendOrderedBroadcast(musicIntent, null);
+                context.sendOrderedBroadcast(musicIntent, null);
                 break;
         }
     }
-
 
     @SuppressLint("MissingPermission")
     private void calendarFunc(String calendarData) {

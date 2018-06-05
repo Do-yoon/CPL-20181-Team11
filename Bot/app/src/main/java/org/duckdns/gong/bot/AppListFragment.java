@@ -123,9 +123,9 @@ class AppListAdapter extends BaseAdapter {
                 final SharedPreferences.Editor editor = appNotiEnabled.edit();
 
                 if (holder.checkbox.isChecked()) {
-                    editor.putBoolean(holder.appName.getText().toString(), true).commit();
+                    editor.putBoolean(holder.appName.getText().toString(), true).apply();
                 } else {
-                    editor.remove(holder.appName.getText().toString()).commit();
+                    editor.remove(holder.appName.getText().toString()).apply();
                 }
             }
         });

@@ -8,13 +8,14 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 import static org.duckdns.gong.bot.NotiService.ce;
-import static org.duckdns.gong.bot.NotiService.isSameNetwork;
+
 
 public class BroadReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        switch(intent.getAction()) {
+        switch (intent.getAction()) {
             // 안드로이드 리부팅 시 서비스 자동 시작
             case "android.intent.action.BOOT_COMPLETED":
                 ComponentName cName = new ComponentName(context.getPackageName(), NotiService.class.getName());
@@ -27,15 +28,19 @@ public class BroadReceiver extends BroadcastReceiver {
                 NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 
                 if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                    String wifiName=PreferenceManager.getDefaultSharedPreferences(context)
+                    String wifiName = PreferenceManager.getDefaultSharedPreferences(context)
                             .getString("pref_key_wifi_name", "");
-                    // 와이파이의 이름으로 서버와 같은 네트워크에 있는지 체크
-                    if (wifi.getSSID().equals("\""+wifiName+"\"")) {
-                        isSameNetwork = true;
-                        ce.enterServer();
+                    // 설정창에서 와이파이 이름이 입력 안된 경우를 체크
+                    if ((wifiName.equals(""))) {
+                        Toast.makeText(context, "설정창에서 와이파이 이름을 입력하세요", Toast.LENGTH_LONG).show();
+                        return;
+                    } else {
+                        // 와이파이의 이름으로 서버와 같은 네트워크에 있는지 체크
+                        if (wifi.getSSID().equals("\"" + wifiName + "\"")) {
+                            ce.enterServer();
+                        }
                     }
-                } else if (networkInfo.getState() == NetworkInfo.State.DISCONNECTED && isSameNetwork) {
-                    isSameNetwork = false;
+                } else if (networkInfo.getState() == NetworkInfo.State.DISCONNECTED && ce.getIsConnected()) {
                     ce.closeConnect();
                 }
                 break;

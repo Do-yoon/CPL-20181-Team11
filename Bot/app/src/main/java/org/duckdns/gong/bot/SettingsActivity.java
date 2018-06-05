@@ -29,7 +29,6 @@ public class SettingsActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        checkPermission();
         // 액티비티가 시작되면 설정창을 실행
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
@@ -40,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // 다른 액티비티에서 복귀할 때 권한 체크
+        // 필수권한 체크
         checkPermission();
     }
 
@@ -51,7 +50,8 @@ public class SettingsActivity extends AppCompatActivity {
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.READ_CALENDAR}, MY_REQ_CODE);
-        } else {
+        }
+        else {
             // 알림 접근 권한을 체크, 비활성화시 권한 요청
             if (!Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners").contains(this.getApplicationContext().getPackageName())) {
                 new AlertDialog.Builder(this)
@@ -138,7 +138,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 .show();
                     }
                 }
-                if (trueCount == 3) {
+                if (trueCount == 4) {
                     if (!Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners").contains(activity.getApplicationContext().getPackageName())) {
                         new AlertDialog.Builder(this)
                                 .setTitle("권한")

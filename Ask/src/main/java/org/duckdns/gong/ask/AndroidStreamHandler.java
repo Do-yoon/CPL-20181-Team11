@@ -5,10 +5,12 @@ import com.amazon.ask.Skills;
 import com.amazon.ask.SkillStreamHandler;
 import org.duckdns.gong.ask.handlers.CancelandStopIntentHandler;
 import org.duckdns.gong.ask.handlers.HelpIntentHandler;
-import org.duckdns.gong.ask.handlers.MessageIntentHandler;
 import org.duckdns.gong.ask.handlers.NameCallIntentHandler;
+import org.duckdns.gong.ask.handlers.NumberCallIntentHandler;
+import org.duckdns.gong.ask.handlers.NameMessageIntentHandler;
 import org.duckdns.gong.ask.handlers.NotiIntentHandler;
 import org.duckdns.gong.ask.handlers.NumberCallIntentHandler;
+import org.duckdns.gong.ask.handlers.NumberMessageIntentHandler;
 import org.duckdns.gong.ask.handlers.SessionEndedRequestHandler;
 import org.duckdns.gong.ask.handlers.LaunchRequestHandler;
 import org.duckdns.gong.ask.handlers.WolIntentHandler;
@@ -27,7 +29,8 @@ public class AndroidStreamHandler extends SkillStreamHandler {
                         new NotiIntentHandler(),
                         new NameCallIntentHandler(),
                         new NumberCallIntentHandler(),
-                        new MessageIntentHandler(),
+                        new NameMessageIntentHandler(),
+                        new NumberMessageIntentHandler(),
                         new WolIntentHandler(),
                         new TimerIntentHandler(),
                         new CancelandStopIntentHandler(),

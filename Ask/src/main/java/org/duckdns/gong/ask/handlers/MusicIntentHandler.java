@@ -37,6 +37,10 @@ public class MusicIntentHandler implements RequestHandler {
                 cl.sendStr("req music pause");
                 speechText = "Ok. I will send pause music request.";
                 break;
+            case "stop":
+                cl.sendStr("req music pause");
+                speechText = "Ok. I will send stop music request.";
+                break;
             case "next":
                 cl.sendStr("req music next");
                 speechText = "Ok. I will send next music request.";
