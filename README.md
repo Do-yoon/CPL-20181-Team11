@@ -17,5 +17,5 @@ https://www.eiric.or.kr/util/pdsFileDownload.php?db=TB_PostConference2&fileName=
 ### 구현
 * Alexa Skill Kit을 이용하여 Alexa를 라즈베리파이에 빌드(Third party API만을 이용)
 * 빌드한 Alexa는 같은 Wi-Fi 연결을 사용하는 모바일을 찾아 연결요청
-* 스피커에서의 명령어와 응답을 매칭시킨 뒤, 대답에 들어갈 메시지 내용 등은 안드로이드로 요청하여 받아옴
+* API를 이용해 음성 명령에 대한 응답을 매칭시킨 뒤, 응답서버를 통해 대답에 들어갈 메시지 내용을 안드로이드에 요청
 * 연결된 응답서버는 AWS를 이용함
