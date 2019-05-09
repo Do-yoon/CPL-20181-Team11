@@ -10,10 +10,10 @@ https://www.eiric.or.kr/util/pdsFileDownload.php?db=TB_PostConference2&fileName=
 * 본 연구과제의 최종 목표는 현재의 스마트 홈 시스템의 범주내에 모바일을 포함시켜  사용자가 집안에서 모바일에서 일어나는 각종 이벤트를 AI 스피커를 통해서 손쉽게 파악하는데 있음
 ### 연구내용
 * 스마트 홈의 범주 내에 있는 모바일 기기 조작을 위한 개선된 스마트 홈 시스템 구현
-  ** 라즈베리파이와 아마존의 Alexa API를 이용한 AI 스피커 제작
-  ** AI speaker와 모바일 기기 사이의 네트워크 모듈 제작
-  ** AI speaker Wifi 접속 기기 감지 모듈 제작
-  ** AI speaker의 메시지를 전달받아 이벤트를 실행시키는 모바일 어플리케이션 제작
+  ** 라즈베리파이와 아마존의 Alexa API를 이용한 AI 스피커 제작<br/>
+  ** AI speaker와 모바일 기기 사이의 네트워크 모듈 제작<br/>
+  ** AI speaker Wifi 접속 기기 감지 모듈 제작<br/>
+  ** AI speaker의 메시지를 전달받아 이벤트를 실행시키는 모바일 어플리케이션 제작<br/>
 ### 구현
 * Alexa Skill Kit을 이용하여 Alexa를 라즈베리파이에 빌드(Third party API만을 이용)
 * 빌드한 Alexa는 같은 Wi-Fi 연결을 사용하는 모바일을 찾아 연결요청
