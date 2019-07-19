@@ -180,12 +180,12 @@ class Server {
                                     notifications.add(msg.substring(msg.indexOf(" ") + 1));
                                     break;
                                 case "getnoti":
-                                    // 서버에 저장된 알림을 ASW로 전달
+                                    // 서버에 저장된 알림을 AWS로 전달
                                     notifications.add("q1w2e3r4");
                                     writeStr(notifications, bw);
                                     break;
                                 case "req":
-                                    // ASW로 부터 온 요청을 안드로이드로 전달
+                                    // AWS로 부터 온 요청을 안드로이드로 전달
                                     writeStr(msg.substring(msg.indexOf(" ") + 1), bws.get("android"));
                                     break;
                                 case "arduino":
